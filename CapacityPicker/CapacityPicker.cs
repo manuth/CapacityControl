@@ -1,4 +1,18 @@
-﻿using System;
+﻿/* ****************************************************************************
+ *
+ * Copyright (c) Manuel Thalmann
+ *
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
+ * copy of the license can be found in the LICENSE file at the root of this distribution. If 
+ * you cannot locate the Apache License, Version 2.0, please send an email to 
+ * manu.th999@gmail.com. By using this source code in any fashion, you are agreeing to be bound 
+ * by the terms of the Apache License, Version 2.0.
+ *
+ * You must not remove this notice, or any other, from this software.
+ *
+ * ***************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -316,6 +330,24 @@ namespace CapacityPicker
         }
 
         /// <summary>
+        /// Returns the best matching unit
+        /// </summary>
+        public static CapacityUnits GetPreferredUnit(decimal value, int decimalPlaces, CapacityUnits baseUnit)
+        {
+            if (value > 0)
+            {
+                CapacityUnitInfo[] nonZeroUnits = CapacityUnitInfo.GetCapacityUnitInfos().OrderByDescending(unit => unit.Multiplier).Where(unit => unit.Multiplier > 0).ToArray();
+
+                int i;
+                for (i = 0; i < nonZeroUnits.Length && GetDecimalPlaceCount(value, baseUnit, nonZeroUnits[i].Unit, false, decimalPlaces) > decimalPlaces; i++) { }
+
+                return nonZeroUnits[i].Unit;
+            }
+            else
+                return CapacityUnitInfo.GetCapacityUnitInfos().First(unit => unit.Multiplier == 0).Unit;
+        }
+
+        /// <summary>
         /// Returns the best matching count of decimal places
         /// </summary>
         /// <param name="value">Defines the value whose best matching number of decimal places should be calculated</param>
@@ -335,11 +367,25 @@ namespace CapacityPicker
         /// <returns>Returns the best matching count of decimal places</returns>
         protected virtual int GetDecimalPlaceCount(decimal value, CapacityUnits unit, bool minCount)
         {
+            return GetDecimalPlaceCount(value, baseUnit.Unit, unit, minCount, decimalPlaces);
+        }
+
+        /// <summary>
+        /// Returns the best matching count of decimal places
+        /// </summary>
+        /// <param name="value">Defines the value whose best matching number of decimal places should be calculated</param>
+        /// <param name="baseUnit">Defines the unit of the specified value</param>
+        /// <param name="unit">Defines the dataunit whose best matching count of decimal places should be calculated</param>
+        /// <param name="minCount">Defines whether the minimal or the maximal count of decimal places should be returned</param>
+        /// <param name="decimalPlaces">Defines the preferred count of decimal places</param>
+        /// <returns>Returns the best matching count of decimal places</returns>
+        protected static int GetDecimalPlaceCount(decimal value, CapacityUnits baseUnit, CapacityUnits unit, bool minCount, int decimalPlaces)
+        {
             CapacityUnitInfo unitInfo = CapacityUnitInfo.CapacityUnitInfos[unit];
             int i = 0;
             if (value > 0 && unitInfo.Multiplier > 0)
             {
-                value = baseUnit.ConvertTo(unitInfo, value);
+                value = CapacityUnitInfo.CapacityUnitInfos[baseUnit].ConvertTo(unitInfo, value);
                 try
                 {
                     if (minCount)
@@ -349,8 +395,8 @@ namespace CapacityPicker
                 }
                 catch { }
             }
-            if (i < DecimalPlaces)
-                i = DecimalPlaces;
+            if (i < decimalPlaces)
+                i = decimalPlaces;
             return i;
         }
 

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Manuel Thalmann")]
 [assembly: AssemblyProduct("CapacityControl")]
-[assembly: AssemblyCopyright("Copyright © Manuel Thalmann")]
+[assembly: AssemblyCopyright("Copyright © Manuel Thalmann 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

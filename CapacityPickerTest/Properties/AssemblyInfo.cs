@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CapacityPickerTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Win PE Pass")]
-[assembly: AssemblyProduct("CapacityPickerTest")]
-[assembly: AssemblyCopyright("Copyright © Win PE Pass 2016")]
+[assembly: AssemblyCompany("Manuel Thalmann")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("Copyright © Manuel Thalmann 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
