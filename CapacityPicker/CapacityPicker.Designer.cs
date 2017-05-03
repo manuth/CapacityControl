@@ -69,7 +69,7 @@
             this.valueUpDown.Size = new System.Drawing.Size(131, 20);
             this.valueUpDown.TabIndex = 1;
             this.valueUpDown.ThousandsSeparator = true;
-            this.valueUpDown.ValueChanged += new System.EventHandler(this.valueUpDown_ValueChanged);
+            this.valueUpDown.ValueChanged += new System.EventHandler(this.ValueUpDown_ValueChanged);
             // 
             // unitComboBox
             // 
@@ -81,7 +81,7 @@
             this.unitComboBox.Name = "unitComboBox";
             this.unitComboBox.Size = new System.Drawing.Size(86, 21);
             this.unitComboBox.TabIndex = 2;
-            this.unitComboBox.SelectedValueChanged += new System.EventHandler(this.unitComboBox_SelectedValueChanged);
+            this.unitComboBox.SelectedValueChanged += new System.EventHandler(this.UnitComboBox_SelectedValueChanged);
             // 
             // CapacityPicker
             // 

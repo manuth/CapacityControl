@@ -121,7 +121,7 @@ namespace CapacityPicker
         /// Returns or sets the number of decimal places to show
         /// </summary>
         [
-            Category(Constants.CategoryName)
+            Category(Constants.CategoryName),
             Description("Die Anzahl der Stellen nach dem Komma, die angezeigt werden sollen"),
             RefreshProperties(RefreshProperties.All)
         ]
@@ -209,7 +209,7 @@ namespace CapacityPicker
         /// Hits when the user changes the value
         /// </summary>
         [
-            Category(Constants.CategoryName)
+            Category(Constants.CategoryName),
             Description("Tritt ein, wenn der aktuelle Wert sich geändert hat.")
         ]
         public event EventHandler ValueChanged;
@@ -218,7 +218,7 @@ namespace CapacityPicker
         /// Hits when the current unit changed
         /// </summary>
         [
-            Category(Constants.CategoryName)
+            Category(Constants.CategoryName),
             Description("Tritt ein, wenn die aktuelle Masseinheit sich geändert hat.")
         ]
         public event EventHandler UnitChanged;
@@ -403,7 +403,7 @@ namespace CapacityPicker
         /// <summary>
         /// Hits when the user changes the current value
         /// </summary>
-        private void valueUpDown_ValueChanged(object sender, EventArgs e)
+        private void ValueUpDown_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = sender as NumericUpDown;
             if (numericUpDown.Value > 0 && unit.Multiplier <= 0)
@@ -426,7 +426,7 @@ namespace CapacityPicker
         /// <summary>
         /// Hits when the user thanges the current unit
         /// </summary>
-        private void unitComboBox_SelectedValueChanged(object sender, EventArgs e)
+        private void UnitComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             if ((sender as ComboBox).SelectedItem != null)
             {
